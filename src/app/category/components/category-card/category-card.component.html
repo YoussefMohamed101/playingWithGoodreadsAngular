@@ -1,6 +1,7 @@
 <div class="cateogery_card">
-<mat-card >
-<mat-card-content matRipple>{{category.name}}</mat-card-content>
-</mat-card>
+  <mat-card>
+    <mat-card-content (click)="navigateToGenreBooks(category._id)" matRipple>{{
+      category.name
+    }}</mat-card-content>
+  </mat-card>
 </div>
-

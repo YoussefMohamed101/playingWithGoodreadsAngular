@@ -1,1 +1,43 @@
-<p>category-details works!</p>
+<h1 class="mat-h1 mx-3 mt-3 text-center">{{ genre.name }}</h1>
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div
+        class="col-sm-4 col-lg-4"
+        *ngFor="
+          let book of books.slice(
+            paginator.pageIndex * paginator.pageSize,
+            paginator.pageIndex * paginator.pageSize + paginator.pageSize
+          )
+        "
+      >
+        <div class="d-flex justify-content-center">
+          <div>
+            <mat-card
+              (click)="navigateToBookDetails(book._id)"
+              matRipple
+              class="example-card shadow m-4"
+              style="height: 300px; width: 300px"
+            >
+              <img
+                class="img-fluid"
+                mat-card-lg-image
+                [src]="'http://localhost:3000/' + book.coverImage"
+                alt="Book Photo"
+              />
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<div class="fixed-bottom d-flex justify-content-center">
+  <mat-paginator
+    #paginator
+    [length]="books.length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+  ></mat-paginator>
+</div>

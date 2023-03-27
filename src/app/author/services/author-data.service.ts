@@ -6,21 +6,22 @@ import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 // import { Book} from '../';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthorDataService {
-
-  constructor(private http: HttpClient,) { }
-  private readonly baseUrl = 'http://localhost:3000/api/author'
-  private readonly adminUrl = 'http://localhost:3000/api/admin/author'
+  constructor(private http: HttpClient) {}
+  private readonly baseUrl = 'http://localhost:3000/api/author';
+  private readonly adminUrl = 'http://localhost:3000/api/admin/author';
   getAuthors(): Observable<any[]> {
     return this.http.get<any[]>(this.baseUrl);
   }
+  getAuthor(authorId: string): Observable<any[]> {
+    return this.http.get<any>(`${this.baseUrl}/${authorId}`);
+  }
   addAuthor(formData: any): Observable<any> {
-    return this.http.post<any>(this.adminUrl, formData)
+    return this.http.post<any>(this.adminUrl, formData);
   }
   updateAuthor(formData: any): Observable<any> {
-    return this.http.put<any>(this.adminUrl, formData)
+    return this.http.put<any>(this.adminUrl, formData);
   }
-
 }

@@ -1,3 +1,53 @@
-<p>
-  author-details works!
-</p>
+<div class="card mb-3" style="max-width: 540px">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+        *ngIf="author && author.photo"
+        [src]="'http://localhost:3000/' + author.photo"
+        alt="Author Photo"
+        class="img-fluid rounded-start"
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ author?.first_name }} {{ author?.last_name }}
+        </h5>
+        <p class="card-text">
+          {{ author?.date_of_birth | date : "dd/MM/yyyy" }}
+          {{ author?.date_of_death | date : "dd/MM/yyyy" }}
+        </p>
+        <p class="card-text">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div
+      class="col-sm-12 col-md-6 col-lg-4 mt-5"
+      *ngFor="let book of author?.authors_books"
+    >
+      <div class="card flex justify-content-center">
+        <p-card
+          header="{{ book.title }}"
+          subheader="Card Subheader"
+          [style]="{ width: '360px' }"
+        >
+          <ng-template pTemplate="header">
+            <img
+              alt="Card"
+              [src]="'http://localhost:3000/' + book.coverImage"
+            />
+          </ng-template>
+          <p>
+            {{ book.summary }}
+          </p>
+        </p-card>
+      </div>
+    </div>
+  </div>
+</div>
